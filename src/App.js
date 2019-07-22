@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Form from "./components/Form";
+import Filter from "./components/Filter";
+import TodoList from "./components/TodoList";
+import useTodos from "./useTodos.js";
+
+import "./App.css";
 
 function App() {
+  const {
+    todos,
+    setTodos,
+    todoId,
+    setTodoId,
+    toggleTodo,
+    removeTodo,
+    todosToDisplay,
+    setActiveFilter
+  } = useTodos();
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="todo-app">
+      <Form
+        setTodos={setTodos}
+        todos={todos}
+        todoId={todoId}
+        setTodoId={setTodoId}
+      />
+      <Filter setActiveFilter={setActiveFilter} />
+      {todos[0] ? (
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Showing: {todosToDisplay.length}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      ) : null}
+      <TodoList
+        todos={todosToDisplay}
+        setTodos={setTodos}
+        toggleTodo={toggleTodo}
+        removeTodo={removeTodo}
+      />
     </div>
   );
 }
