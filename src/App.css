@@ -1,8 +1,9 @@
 .todo-app {
   margin: 0 auto;
-  width: 480px;
+  max-width: 400px;
   padding: 5px;
   background-color: aliceblue;
+  text-align: center;
 }
 
 .todo-app ul{

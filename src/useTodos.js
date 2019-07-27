@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ALL, DONE, TODO } from "./filters";
 
-function useTodosWithFilter() {
+function useTodos() {
 
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem("todos")) || []
@@ -9,8 +9,7 @@ function useTodosWithFilter() {
 
   const lastTodoId = Math.max(...todos.map(todo => todo.id), 0); // compute greatest id
   const [todoId, setTodoId] = useState(lastTodoId + 1); // set next todo id
-  const [activeFilter, setActiveFilter] = useState(ALL);
-
+  
   function toggleTodo(todoId) {
     const newTodos = [...todos];
     console.log("newTodos: ", newTodos);
@@ -21,6 +20,7 @@ function useTodosWithFilter() {
 
   function removeTodo(todoId) {
     const newTodos = [...todos];
+    console.log("newTodos: ", newTodos);
     const index = newTodos.findIndex(todo => todo.id === todoId);
     newTodos.splice(index, 1);
     setTodos(newTodos);
@@ -39,18 +39,17 @@ function useTodosWithFilter() {
       }
     }
   }
-  const todosToDisplay = filterTodos(activeFilter);
 
   return {
+    ALL,
     todos,
     setTodos,
     todoId,
     setTodoId,
     toggleTodo,
     removeTodo,
-    todosToDisplay,
-    setActiveFilter
+    filterTodos
   };
 }
 
-export default useTodosWithFilter;
+export default useTodos;

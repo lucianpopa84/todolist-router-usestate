@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function Form({ setTodos, todos, todoId, setTodoId }) {
   const [todoText, setTodoText] = useState("");
-  // debugger;
   function addTodo(e) {
     e.preventDefault();
     if (todoText) {
@@ -20,7 +19,7 @@ function Form({ setTodos, todos, todoId, setTodoId }) {
   }
   return (
     <>
-      <div> Todo Form </div>
+      <div> Todo List </div>
       <form className = "todoForm">
         <label>
           Task:
